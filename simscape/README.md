@@ -1,0 +1,1 @@
+Run the simulation and use `saveout(out, 'simscape_initial_1.py')` to save the result.
