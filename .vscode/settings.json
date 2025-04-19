@@ -1,11 +1,11 @@
 {
     "files.exclude": {
         "simscape/*.py": true,
-        "simscape/*.slx": true
+        "simscape/*.slx": true,
     },
     "search.exclude": {
         "simscape/*.py": true,
-        "simscape/*.slx": true
+        "simscape/*.slx": true,
     },
     "python.analysis.exclude": [
         "simscape/**",
@@ -15,4 +15,9 @@
     ],
     "python.analysis.typeCheckingMode": "standard",
     "python.analysis.diagnosticMode": "openFilesOnly",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "120",
+    ],
 }
