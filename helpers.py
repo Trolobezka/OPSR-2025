@@ -130,26 +130,54 @@ def _plot(
 
 def plot(
     time_1: npt.NDArray[np.float64],
-    x_c_1: npt.NDArray[np.float64],
-    y_c: npt.NDArray[np.float64],
-    alpha: npt.NDArray[np.float64],
-    dx_c: npt.NDArray[np.float64],
-    dy_c: npt.NDArray[np.float64],
-    dalpha: npt.NDArray[np.float64],
+    x_c: npt.NDArray[np.float64] | None,
+    y_c: npt.NDArray[np.float64] | None,
+    alpha: npt.NDArray[np.float64] | None,
+    dx_c: npt.NDArray[np.float64] | None,
+    dy_c: npt.NDArray[np.float64] | None,
+    dalpha: npt.NDArray[np.float64] | None,
+    label: str | None = None,
+    rows: int = 2,
+):
+    if x_c is not None:
+        plt.subplot(rows, 3, 1)
+        _plot(time_1, x_c, label, r"time $t$ [s]", r"position $x_c$ [m]")
+    if y_c is not None:
+        plt.subplot(rows, 3, 2)
+        _plot(time_1, y_c, label, r"time $t$ [s]", r"position $y_c$ [m]")
+    if alpha is not None:
+        plt.subplot(rows, 3, 3)
+        _plot(time_1, np.degrees(alpha), label, r"time $t$ [s]", r" rotation $\alpha$ [deg]")
+    if dx_c is not None:
+        plt.subplot(rows, 3, 4)
+        _plot(time_1, dx_c, label, r"time $t$ [s]", r"velocity $dx_c / dt$ [m/s]")
+    if dy_c is not None:
+        plt.subplot(rows, 3, 5)
+        _plot(time_1, dy_c, label, r"time $t$ [s]", r"velocity $dy_c / dt$ [m/s]")
+    if dalpha is not None:
+        plt.subplot(rows, 3, 6)
+        _plot(time_1, np.degrees(dalpha), label, r"time $t$ [s]", r"velocity $d\alpha / dt$ [deg/s]")
+
+
+def plot2(
+    time_1: npt.NDArray[np.float64],
+    x_c: npt.NDArray[np.float64] | None,
+    y_c: npt.NDArray[np.float64] | None,
+    alpha: npt.NDArray[np.float64] | None,
+    dx_c: npt.NDArray[np.float64] | None,
+    dy_c: npt.NDArray[np.float64] | None,
+    dalpha: npt.NDArray[np.float64] | None,
+    f_x: npt.NDArray[np.float64] | None,
+    f_y: npt.NDArray[np.float64] | None,
     label: str | None = None,
 ):
-    plt.subplot(2, 3, 1)
-    _plot(time_1, x_c_1, label, r"time $t$ [s]", r"position $x_c$ [m]")
-    plt.subplot(2, 3, 2)
-    _plot(time_1, y_c, label, r"time $t$ [s]", r"position $y_c$ [m]")
-    plt.subplot(2, 3, 3)
-    _plot(time_1, np.degrees(alpha), label, r"time $t$ [s]", r" rotation $\alpha$ [deg]")
-    plt.subplot(2, 3, 4)
-    _plot(time_1, dx_c, label, r"time $t$ [s]", r"velocity $dx_c / dt$ [m/s]")
-    plt.subplot(2, 3, 5)
-    _plot(time_1, dy_c, label, r"time $t$ [s]", r"velocity $dy_c / dt$ [m/s]")
-    plt.subplot(2, 3, 6)
-    _plot(time_1, np.degrees(dalpha), label, r"time $t$ [s]", r"velocity $d\alpha / dt$ [deg/s]")
+    plot(time_1, x_c, y_c, alpha, dx_c, dy_c, dalpha, label=label, rows=3)
+    if f_x is not None:
+        plt.subplot(3, 3, 7)
+        _plot(time_1, f_x, label, r"time $t$ [s]", r"force $f_x$ [N]")
+    if f_y is not None:
+        plt.subplot(3, 3, 8)
+        _plot(time_1, f_y, label, r"time $t$ [s]", r"force $f_y$ [N]")
 
 
 def print_array(array: npt.NDArray[np.float64]) -> None:
