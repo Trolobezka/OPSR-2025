@@ -2,16 +2,26 @@
     "files.exclude": {
         "simscape/*.py": true,
         "simscape/*.slx": true,
+        "*/*.odg": true,
+        "__pycache__/*": true,
+        ".venv/*": true,
+        ".autowrap/*": true,
     },
     "search.exclude": {
         "simscape/*.py": true,
         "simscape/*.slx": true,
+        "*/*.odg": true,
+        "__pycache__/*": true,
+        ".venv/*": true,
+        ".autowrap/*": true,
     },
     "python.analysis.exclude": [
         "simscape/**",
+        ".autowrap/**",
     ],
     "python.analysis.ignore": [
         "simscape/**",
+        ".autowrap/**",
     ],
     "python.analysis.typeCheckingMode": "standard",
     "python.analysis.diagnosticMode": "openFilesOnly",

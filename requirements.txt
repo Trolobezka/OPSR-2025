@@ -9,3 +9,5 @@ cvxpy
 black
 ipython
 ipykernel
+
+Cython

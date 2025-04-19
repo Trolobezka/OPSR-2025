@@ -1,12 +1,11 @@
 import math
 import typing as T
-from pprint import pprint
 
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.typing as npt
 import sympy as smp
-from IPython.display import HTML, Latex, display
+from IPython.display import Latex, display
 from sympy.core._print_helpers import Printable  # type: ignore
 
 HALF = smp.Rational("0.5")
@@ -27,14 +26,7 @@ def print2(*objs: Printable | str, newline: bool = False) -> None:
             desc
             + r"$\displaystyle "
             + (r",\newline " if newline else r",\ ").join(
-                [
-                    (
-                        ("{" if i % 2 == 0 else r"\textcolor{gray}{")
-                        + smp.latex(obj)
-                        + "}"
-                    )
-                    for (i, obj) in enumerate(objs)
-                ]
+                [(("{" if i % 2 == 0 else r"\textcolor{gray}{") + smp.latex(obj) + "}") for (i, obj) in enumerate(objs)]
             )
             + "$"
         )
@@ -147,23 +139,17 @@ def plot(
     label: str | None = None,
 ):
     plt.subplot(2, 3, 1)
-    _plot(time_1, x_c_1, label, r"čas $t$ [s]", r"poloha $x_c$ [m]")
+    _plot(time_1, x_c_1, label, r"time $t$ [s]", r"position $x_c$ [m]")
     plt.subplot(2, 3, 2)
-    _plot(time_1, y_c, label, r"čas $t$ [s]", r"poloha $y_c$ [m]")
+    _plot(time_1, y_c, label, r"time $t$ [s]", r"position $y_c$ [m]")
     plt.subplot(2, 3, 3)
-    _plot(time_1, np.degrees(alpha), label, r"čas $t$ [s]", r"natočení $\alpha$ [deg]")
+    _plot(time_1, np.degrees(alpha), label, r"time $t$ [s]", r" rotation $\alpha$ [deg]")
     plt.subplot(2, 3, 4)
-    _plot(time_1, dx_c, label, r"čas $t$ [s]", r"rychlost $dx_c / dt$ [m/s]")
+    _plot(time_1, dx_c, label, r"time $t$ [s]", r"velocity $dx_c / dt$ [m/s]")
     plt.subplot(2, 3, 5)
-    _plot(time_1, dy_c, label, r"čas $t$ [s]", r"rychlost $dy_c / dt$ [m/s]")
+    _plot(time_1, dy_c, label, r"time $t$ [s]", r"velocity $dy_c / dt$ [m/s]")
     plt.subplot(2, 3, 6)
-    _plot(
-        time_1,
-        np.degrees(dalpha),
-        label,
-        r"čas $t$ [s]",
-        r"rychlost $d\alpha / dt$ [deg/s]",
-    )
+    _plot(time_1, np.degrees(dalpha), label, r"time $t$ [s]", r"velocity $d\alpha / dt$ [deg/s]")
 
 
 def print_array(array: npt.NDArray[np.float64]) -> None:
